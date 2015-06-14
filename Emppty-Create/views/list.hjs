@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Le styles -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+</head>
+<body>
+<h1>{{uname}}</h1>
+<div class="container">
+    <h2 class="m0auto ag-frame">
+        <div class="clearfix"><h2 class="fl">姓名：{{ uname }}</h2><h2 class="logout fl"><a class="cfff" href="/logout">退出</a></h2></div>
+        <h2>访问该页面{{count}}次数</h2>
+        <div>
+            <a class="bg-af" href="/plist/product">增加</a>
+        </div>
+        <table class="ag-ls-top">
+            <tbody><tr>
+                <th width="20%">序号</th>
+                <th width="20%">名称 </th>
+                <th width="20%">描述 </th>
+                <th width="20%">图片 </th>
+                <th width="20%">操作</th>
+            </tr>
+            </tbody></table>
+        <div class="ag-ls-md-fm">
+            <table class="ag-ls-md">
+                <tbody>
+                {{#productlist}}
+                <tr>
+                    <td width="20%">{{id}}</td>
+                    <td width="20%" class="tl">{{name}} </td>
+                    <td width="20%">{{des}} </td>
+                    <td width="20%"><img src="{{image}}" alt=""/></td>
+                    <td width="20%">
+                        <a href="/plist/product?id={{id}}">修改</a>
+                        <a class="td-delete" data-id="{{id}}" >删除</a>
+                    </td>
+                </tr>
+                {{/productlist}}
+                </tbody></table>
+        </div>
+    </div>
+
+</div> <!-- /container -->
+</body>
+<script src="/javascript/jquery-1.11.3.min.js"></script>
+<script>
+    $(".td-delete").click(function(){
+        var id=$(this).attr("data-id");
+        if(confirm('确定删除该产品吗?')){
+            $.ajax({
+                url:'/list/delete',
+                data:{id:id},
+                type:"POST",
+                success:function(data){
+                    console.log(data);
+                    if(data=="True"){
+                        alert("删除成功");
+
+                    }else{
+                        alert("删除失败");
+                    }
+                    window.location.href=location.href;
+                }
+            });
+        }
+        return false;
+    });
+</script>
+</html>

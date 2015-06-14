@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Le styles -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a href="/login">请登录</a>
+        <a href="/list">列表页</a>
+    </div>
+</body>

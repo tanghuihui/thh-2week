@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="/stylesheets/base.css" rel="stylesheet">
+</head>
+<body>
+<form action="/addEdit" method="post">
+    {{#productlist}}
+    <ul>
+        <li><label>编号：</label><label>{{id}}</label></li>
+        <li>
+            <label>名称：</label><input type="text" value="{{name}}"  name="pname" />
+        </li>
+        <li>
+            <label>描述：</label><input type="text" value="{{des}}" name="pdes"/>
+        </li>
+    </ul>
+    {{/productlist}}
+    <input type="hidden" value="{{hid}}" name="hid"/>
+    <input type="submit" value="提交"/>
+</form>
+<script src="/javascripts/jquery-2.1.1.js"></script>
+
+</body>
+</html>

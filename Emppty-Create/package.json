@@ -1,0 +1,25 @@
+{
+  "name": "tanghuihui",
+  "version": "1.0.0",
+  "description": "for testing",
+  "main": "bin/www.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "test",
+    "mvc",
+    "node"
+  ],
+  "author": "汤慧慧",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.12.4",
+    "express": "^4.12.4",
+    "express-session": "^1.11.3",
+    "hjs": "0.0.6",
+    "moment": "^2.10.3",
+    "mssql": "^2.1.5",
+    "uuid": "^2.0.1"
+  }
+}
