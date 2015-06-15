@@ -31,7 +31,7 @@
                 <tbody>
                 {{#productlist}}
                 <tr>
-                    <td width="20%">{{id}}</td>
+                    <td width="20%" href="{{id}}">{{id}}</td>
                     <td width="20%" class="tl">{{name}} </td>
                     <td width="20%">{{des}} </td>
                     <td width="20%"><img src="{{image}}" alt=""/></td>

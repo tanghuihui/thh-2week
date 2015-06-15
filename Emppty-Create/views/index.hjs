@@ -12,6 +12,6 @@
 <body>
     <div class="container">
         <a href="/login">请登录</a>
-        <a href="/list">列表页</a>
+        <a href="/plist">列表页</a>
     </div>
 </body>
