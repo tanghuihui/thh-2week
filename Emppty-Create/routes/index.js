@@ -4,6 +4,7 @@
 var express=require('express');
 var router = express.Router();
 var us=require('../Biz/users');
+var sqlOperator=require('../db/sqlOperator.js');
 router.get('/',function(req,res,next){
     // res.send('Home');
 //res.render('index.hjs',{title:'hjs'});
@@ -28,12 +29,24 @@ router.post('/login',function(req,res,next){
 
     var usernmae=req.body.username.trim();
     var password=req.body.password.trim();
-   if(us.users.getuser(usernmae,password)){
-       req.session.user=usernmae;
-       res.redirect('/plist');
-   }else {
-       res.send("用户名不存在");
-   }
+
+    sqlOperator.query("select * from users where  name='"+usernmae+"' and password='"+password+"'",function(err,recordset){
+        if(recordset){
+                req.session.user=recordset[0].name;
+                res.redirect('/plist');
+
+        }else {
+            res.send("用户名不存在");
+        }
+    });
+
+
+   //if(us.users.getuser(usernmae,password)){
+   //    req.session.user=usernmae;
+   //    res.redirect('/plist');
+   //}else {
+   //    res.send("用户名不存在");
+   //}
 
 });
 

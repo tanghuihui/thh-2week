@@ -7,13 +7,13 @@ var sqlOperator=require('../db/sqlOperator.js');
 var products=require('../Biz/products');
 router.get('/',function(req,res,next){
     req.session.count = req.session.count?req.session.count+1:1;
-      //sqlOperator.query('select * from products',function(err,recordset){
-    //    res.render('list', {title:req.session.user,count:req.session.count, productlist:recordset    });
-    //
-    //
-    //})
+      sqlOperator.query('select * from products',function(err,recordset){
+        res.render('list', {title:'列表',uname:req.session.user,count:req.session.count, productlist:recordset    });
 
-    res.render('list.hjs',{title:'列表',uname:req.session.user,count:req.session.count,productlist:products.products});
+
+    })
+
+    //res.render('list.hjs',{title:'列表',uname:req.session.user,count:req.session.count,productlist:products.products});
 
 });
 
@@ -25,7 +25,7 @@ router.post('/delete',function(req,res,next){
                 sqlOperator.query('delete from products where id='+req.body.id,function(err,recordset){
                     if(err)
                         throw err;
-                    res.json({'error':err});//这种写法比较好。状态码
+                   // res.json({'error':err});//这种写法比较好。状态码
                     res.send("True");
 
                 });
@@ -39,10 +39,10 @@ router.post('/delete',function(req,res,next){
 router.get('/product', function(req, res, next) {
     if(req.query.id){
         sqlOperator.query('select * from products where id='+req.query.id,function(err,recordset){
-            res.render('product', {hid:req.query.id, productlist:recordset    });
+            res.render('product', {title:'编辑产品',hid:req.query.id, productlist:recordset    });
         });
     }else{
-        res.render('product', {hid:"", productlist:[
+        res.render('product', {title:'添加产品',hid:"", productlist:[
             {id:"",name:"",des:"",image:""}]    });
     }
 });
@@ -57,7 +57,7 @@ router.post('/product', function(req, res, next) {
         sqlOperator.query(sql1,function(err,recordset){
             if(err)
                 throw err;
-            res.redirect('/list');
+            res.redirect('/plist');
         });
     }else{
         var sql="insert into products (name,des,image) values('"+req.body.pname+"','"+req.body.pdes+"','http://img.1caifu.com/Upload/Company/Logo/20150421/2015042120084035052816.jpg')";
@@ -66,7 +66,7 @@ router.post('/product', function(req, res, next) {
             console.log(err);
             if(err)
                 throw err;
-            res.redirect('/list');
+            res.redirect('/plist');
         });
     }
 
