@@ -17,7 +17,7 @@ exports.query=function(sql,callback){
         if(err){
             console.log(err);
         }else{
-            console.log('Connected');
+           // console.log('Connected');
         }
         var request=new mssql.Request(connection);
         request.query(sql,callback);

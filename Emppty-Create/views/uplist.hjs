@@ -9,12 +9,9 @@
     <link href="/css/base.css" rel="stylesheet">
 </head>
 <body>
-<h1>{{uname}}</h1>
 <div class="container">
     <div class="m0auto ag-frame">
-        <h2 class="logout fl"><a class="cfff" href="/plist/uplist">用户对应的列表</a></h2>
-        <div class="clearfix"><h2 class="fl">姓名：{{ uname }}</h2><h2 class="logout fl"><a class="cfff" href="/logout">退出</a></h2></div>
-        <h2>访问该页面{{count}}次数</h2>
+        <h2>用户对应的列表</h2>
         <div>
             <a class="bg-af" href="/plist/product">增加</a>
         </div>

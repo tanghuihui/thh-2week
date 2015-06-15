@@ -4,7 +4,9 @@
 var express=require('express');
 var router=express.Router();
 var sqlOperator=require('../db/sqlOperator.js');
+var zy=require('../db/zy.js');
 var products=require('../Biz/products');
+var q=require('q');
 router.get('/',function(req,res,next){
     req.session.count = req.session.count?req.session.count+1:1;
       sqlOperator.query('select * from products',function(err,recordset){
@@ -32,7 +34,10 @@ router.post('/delete',function(req,res,next){
             }
         });
     }
-})
+});
+
+
+
 
 
 
@@ -48,7 +53,26 @@ router.get('/product', function(req, res, next) {
 });
 
 
+router.get('/uplist', function(req, res, next) {
+    zy.sqlzy.then(function(data) {
+        res.render('uplist', {title:'列表',uname:req.session.user,count:req.session.count, productlist:data    });
+    });
 
+   // console.log(zy.sqlzy);
+   // res.render('list', {title:'列表',uname:req.session.user,count:req.session.count, productlist:zy.sqlzy    });
+});
+
+/*
+ sqlOperator.query("select * from users where  name='"+usernmae+"' and password='"+password+"'",function(err,recordset){
+ if(recordset && recordset[0] ){
+ req.session.user=recordset[0].name;
+ res.redirect('/plist');
+
+ }else {
+ res.send("用户名不存在   <a href='/login'>重新登录</a>");
+ }
+ });
+* */
 
 
 router.post('/product', function(req, res, next) {
