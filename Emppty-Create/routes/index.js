@@ -31,12 +31,12 @@ router.post('/login',function(req,res,next){
     var password=req.body.password.trim();
 
     sqlOperator.query("select * from users where  name='"+usernmae+"' and password='"+password+"'",function(err,recordset){
-        if(recordset){
+        if(recordset && recordset[0] ){
                 req.session.user=recordset[0].name;
                 res.redirect('/plist');
 
         }else {
-            res.send("用户名不存在");
+            res.send("用户名不存在   <a href='/login'>重新登录</a>");
         }
     });
 
