@@ -21,6 +21,10 @@
     "moment": "^2.10.3",
     "mssql": "^2.1.5",
     "q": "^1.4.1",
+    "should": "^6.0.3",
     "uuid": "^2.0.1"
+  },
+  "devDependencies": {
+    "should": "^6.0.3"
   }
 }

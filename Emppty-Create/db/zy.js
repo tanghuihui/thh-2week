@@ -3,19 +3,27 @@
  */
 var sqlOperator=require('../db/sqlOperator.js');
 var Q=require('q');
+var should=require('should');
 var userinfo=function(username){
     var deferred = Q.defer();
     sqlOperator.query("select * from users where  name='"+username+"'",function(err,recordset){
         if(err)
             deferred.reject(err);
-        if(recordset && recordset[0]){
+        if(recordset && recordset.length ==1){
             deferred.resolve(recordset[0]);
         }
-        deferred.reject("数据有误");
 
     });
     return deferred.promise;
 };
+
+
+
+
+
+
+
+
 
 
 var uorderlist=function(userid){
@@ -46,6 +54,17 @@ var uproductlist=function(productids){
     return deferred.promise;
 };
 
+///娴嬭瘯鑾峰彇鐨勬暟鎹噷name鐨勫�兼槸鍚︿负admin
+describe('GET USERS TO Products',function(){
+    it("First Query User",function(){
+        return  userinfo('admin').then(function(userinfo){
+            var userid=userinfo.name;
+            return  userid.should.have.startWith('admin');
+        });
+    });
+
+});
+
 exports.sqlzy=userinfo('admin').then(function(userinfo){
     var userid=userinfo.id;
   return  uorderlist(userid);
@@ -61,6 +80,7 @@ exports.sqlzy=userinfo('admin').then(function(userinfo){
 }).then(function(plist) {
     return plist;
 });
+
 
 
 
